@@ -265,40 +265,24 @@ public class SplayTree<T extends Comparable<? super T>> {
 
         // 书中358页例子
         SplayTree<Integer> t = new SplayTree<>();
-        t.root = new BinaryNode<>(12);
-        t.root.left = new BinaryNode<>(5);
-        BinaryNode root_5 = t.root.left;
-        root_5.left = t.nullNode;
-        root_5.right = t.nullNode;
-        t.root.right = new BinaryNode<>(25);
+        t.root = new BinaryNode<>(12, t.nullNode, t.nullNode);
+        t.root.left = new BinaryNode<>(5, t.nullNode, t.nullNode);
+        t.root.right = new BinaryNode<>(25, t.nullNode, t.nullNode);
 
         BinaryNode root_25 = t.root.right;
-        root_25.left = new BinaryNode<>(20);
-        root_25.right = new BinaryNode<>(30);
-        BinaryNode root_30 = root_25.right;
-        root_30.left = t.nullNode;
-        root_30.right = t.nullNode;
+        root_25.left = new BinaryNode<>(20, t.nullNode, t.nullNode);
+        root_25.right = new BinaryNode<>(30, t.nullNode, t.nullNode);
 
         BinaryNode root_20 = root_25.left;
-        root_20.left = new BinaryNode<>(15);
-        root_20.right = new BinaryNode<>(24);
-        BinaryNode root_24 = root_20.right;
-        root_24.left = t.nullNode;
-        root_24.right = t.nullNode;
+        root_20.left = new BinaryNode<>(15, t.nullNode, t.nullNode);
+        root_20.right = new BinaryNode<>(24, t.nullNode, t.nullNode);
 
         BinaryNode root_15 = root_20.left;
-        root_15.left = new BinaryNode<>(13);
-        BinaryNode root_13 = root_15.left;
-        root_13.left = t.nullNode;
-        root_13.right = t.nullNode;
-        root_15.right = new BinaryNode<>(18);
+        root_15.left = new BinaryNode<>(13, t.nullNode, t.nullNode);
+        root_15.right = new BinaryNode<>(18, t.nullNode, t.nullNode);
 
         BinaryNode root_18 = root_15.right;
-        root_18.right = t.nullNode;
-        root_18.left = new BinaryNode<>(16);
-        BinaryNode root_16 = root_18.left;
-        root_16.left = t.nullNode;
-        root_16.right = t.nullNode;
+        root_18.left = new BinaryNode<>(16, t.nullNode, t.nullNode);
 
         t.contains(19);
         System.out.println(t.findMax());
