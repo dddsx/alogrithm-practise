@@ -10,17 +10,18 @@ public class PhoneNumber_17 {
 }
 
 class Solution {
-
-    Map<String, String> phone = new HashMap<>() {{
-        put("2", "abc");
-        put("3", "def");
-        put("4", "ghi");
-        put("5", "jkl");
-        put("6", "mno");
-        put("7", "pqrs");
-        put("8", "tuv");
-        put("9", "wxyz");
-    }};
+    
+    static Map<String, String> phone = new HashMap<>();
+    static {
+        phone.put("2", "abc");
+        phone.put("3", "def");
+        phone.put("4", "ghi");
+        phone.put("5", "jkl");
+        phone.put("6", "mno");
+        phone.put("7", "pqrs");
+        phone.put("8", "tuv");
+        phone.put("9", "wxyz");
+    }
     
     List<String> output = new ArrayList<>();
     
