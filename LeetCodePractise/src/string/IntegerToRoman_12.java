@@ -6,7 +6,7 @@ import java.util.Map;
 public class IntegerToRoman_12 {
     
     public static void main(String[] args) {
-        System.out.println(new Solution().intToRoman(1994));
+        System.out.println(new Solution().intToRoman(1996));
     }
     
     static class Solution {
