@@ -6,11 +6,11 @@ import java.util.Map;
 public class IntegerToRoman_12 {
     
     public static void main(String[] args) {
-        System.out.println(new Solution().intToRoman(1996));
+        //System.out.println(new Solution().intToRoman(1996));
+        System.out.println(new Solution2().intToRoman(5996));
     }
     
     static class Solution {
-    
         static char I = 'I';
         static char V = 'V';
         static char X = 'X';
@@ -20,6 +20,7 @@ public class IntegerToRoman_12 {
         static char M = 'M';
         
         static Map<Integer, Character> romanNums = new HashMap<>();
+        
         static {
             romanNums.put(1, I);
             romanNums.put(5, V);
@@ -73,7 +74,7 @@ public class IntegerToRoman_12 {
                     }
                 }
             }
-    
+            
             num = num % 10;
             int unitNum = num;
             if (unitNum > 0) {
@@ -93,6 +94,25 @@ public class IntegerToRoman_12 {
             }
             
             return result.toString();
+        }
+    }
+    
+    static class Solution2 {
+        
+        public String intToRoman(int num) {
+            StringBuilder sb = new StringBuilder();
+            int values[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+            String syms[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+            int pnt = 0;
+            while (num > 0) {
+                if (num >= values[pnt]) {
+                    sb.append(syms[pnt]);
+                    num -= values[pnt];
+                } else {
+                    pnt++;
+                }
+            }
+            return sb.toString();
         }
     }
 }

@@ -6,9 +6,11 @@ import java.util.Random;
 
 public class Test {
     
-    private final static int TESTCASE_ARRAY_LEN = 20;
+    private final static int TESTCASE_ARRAY_MIN_LEN = 10;
     
-    private final static int TESTCASE_MAX_ELE = 20;
+    private final static int TESTCASE_ARRAY_MAX_LEN = 10;
+    
+    private final static int TESTCASE_MAX_ELE = 9;
     
     private final static int TESTCASE_INTERVAL = 50;
     
@@ -35,7 +37,7 @@ public class Test {
     
     private static int[] generateUseCase(){
         Random random = new Random();
-        int len = 1 + random.nextInt(TESTCASE_ARRAY_LEN);
+        int len = TESTCASE_ARRAY_MIN_LEN + random.nextInt(TESTCASE_ARRAY_MAX_LEN - TESTCASE_ARRAY_MIN_LEN + 1);
         int[] array = new int[len];
         for (int i = 0; i < len; i++) {
             array[i] = random.nextInt(TESTCASE_MAX_ELE + 1);
@@ -118,8 +120,8 @@ public class Test {
     }
     
     public static void main(String[] args) {
-        // test(SortName.MERGINGSORT);
-        testAll();
+        test(SortName.MERGINGSORT);
+        // testAll();
     }
     
 }
