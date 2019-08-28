@@ -1,5 +1,9 @@
 package sort;
 
+/**
+ * 希尔排序，又称缩小增量排序，时间复杂度O(n1.25)
+ * 增量gap取法有各种方案，如gap=[n/2]，gap=[gap/2]或gap=[n/3]+1，gap=[gap/3]+1
+ */
 public class ShellSort {
     
     public static void sort(int[] arr) {

@@ -51,7 +51,7 @@ public class Test {
         
         return array;
     }
-    
+
     private static void check(int[] arr){
         if(arr.length == 0){
             return;
@@ -64,7 +64,7 @@ public class Test {
             prev = arr[i];
         }
     }
-    
+
     private static void test(SortName sortName) {
         System.out.println("进行" + sortName.name() + "(" + sortName.name + ")" + "用例测试");
         
@@ -105,7 +105,16 @@ public class Test {
             System.out.println(Arrays.toString(array));
         }
     }
-    
+
+    public static void test(Sortable s) {
+        while (true) {
+            int[] array = generateUseCase();
+            s.sort(array);
+            check(array);
+            System.out.println(Arrays.toString(array));
+        }
+    }
+
     private static void testAll() {
         // 使用这种实现方式异常会被吞掉，在调用Future#get()方法时异常才会抛出
         // executorService.submit(() -> test(value));
@@ -124,4 +133,10 @@ public class Test {
         // testAll();
     }
     
+}
+
+@FunctionalInterface
+interface Sortable {
+
+    void sort(int[] a);
 }
