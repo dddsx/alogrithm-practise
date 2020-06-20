@@ -73,7 +73,7 @@ public class AddTwoNumbers_2 {
             ListNode p = l1;
             ListNode q = l2;
             ListNode curr = dummyHead;
-            
+
             int carry = 0;
             while (p != null || q != null) {
                 int x = (p != null) ? p.val : 0;
@@ -89,11 +89,11 @@ public class AddTwoNumbers_2 {
                     q = q.next;
                 }
             }
-            
+
             if (carry > 0) {
                 curr.next = new ListNode(carry);
             }
-            
+
             return dummyHead.next;
         }
     }
