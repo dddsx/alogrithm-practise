@@ -1,6 +1,8 @@
 package sort;
 
 
+import sort.unusual.BeadSort;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -9,7 +11,9 @@ public class Test {
     private final static int TESTCASE_ARRAY_MIN_LEN = 10;
     
     private final static int TESTCASE_ARRAY_MAX_LEN = 10;
-    
+
+    private final static int TESTCASE_MIN_ELE = 1;
+
     private final static int TESTCASE_MAX_ELE = 9;
     
     private final static int TESTCASE_INTERVAL = 50;
@@ -26,7 +30,8 @@ public class Test {
         MERGINGSORT("归并排序"),
         HEAPSORT("堆排序"),
         SHELLSORT("希尔排序"),
-        RADIXSORT("基数排序");
+        RADIXSORT("基数排序"),
+        BEADSORT("珠排序");
         
         String name;
         
@@ -40,7 +45,7 @@ public class Test {
         int len = TESTCASE_ARRAY_MIN_LEN + random.nextInt(TESTCASE_ARRAY_MAX_LEN - TESTCASE_ARRAY_MIN_LEN + 1);
         int[] array = new int[len];
         for (int i = 0; i < len; i++) {
-            array[i] = random.nextInt(TESTCASE_MAX_ELE + 1);
+            array[i] = TESTCASE_MIN_ELE + random.nextInt(TESTCASE_MAX_ELE - TESTCASE_MIN_ELE + 1);
         }
         
         try {
@@ -70,6 +75,8 @@ public class Test {
         
         while (true) {
             int[] array = generateUseCase();
+            int[] sourceArray = new int[array.length];
+            System.arraycopy(array, 0, sourceArray, 0, array.length);
             switch (sortName) {
                 case QUICKSORT1:
                     QuickSort1.sort(array, 0, array.length - 1);
@@ -98,10 +105,18 @@ public class Test {
                 case RADIXSORT:
                     RadixSort.sort(array);
                     break;
+                case BEADSORT:
+                    BeadSort.sort(array);
+                    break;
                 default:
                     System.exit(0);
             }
-            check(array);
+            try {
+                check(array);
+            } catch (Exception e) {
+                System.out.println("测试用例不通过:" + Arrays.toString(sourceArray));
+                System.exit(0);
+            }
             System.out.println(Arrays.toString(array));
         }
     }
@@ -129,7 +144,8 @@ public class Test {
     }
     
     public static void main(String[] args) {
-        test(SortName.MERGINGSORT);
+        // test(SortName.MERGINGSORT);
+        test(SortName.BEADSORT);
         // testAll();
     }
     
