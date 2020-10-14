@@ -1,4 +1,4 @@
-package process.schedule;
+package CPUScheduling.process.schedule;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import controlblock.PCB;
-import test.Test;
+import CPUScheduling.test.Test;
 
 public class SJF {
     protected LinkedList<PCB> processQueue;

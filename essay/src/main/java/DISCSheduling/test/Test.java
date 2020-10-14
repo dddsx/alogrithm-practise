@@ -1,10 +1,10 @@
 package DISCSheduling.test;
 
 import java.util.ArrayList;
-import arithmetic.FCFS;
-import arithmetic.SCAN;
-import arithmetic.SSTF;
-import process.PCB;
+import DISCSheduling.arithmetic.FCFS;
+import DISCSheduling.arithmetic.SCAN;
+import DISCSheduling.arithmetic.SSTF;
+import DISCSheduling.process.PCB;
 
 public class Test {
 	private static int PROCESS_NUM = 8;

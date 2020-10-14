@@ -1,8 +1,8 @@
 package CPUScheduling.test;
 
-import process.schedule.FCFS;
-import process.schedule.RR;
-import process.schedule.SJF;
+import CPUScheduling.process.schedule.FCFS;
+import CPUScheduling.process.schedule.RR;
+import CPUScheduling.process.schedule.SJF;
 
 public class Test {
     //private static final Double MAX_ARRIVE_TIME = (double) 5;
