@@ -3,9 +3,9 @@ package sort;
 /**
  * 冒泡排序，时间复杂度O(n²)
  */
-public class BubbleSort {
+public class BubbleSort implements Sortable {
     
-    public static void sort(int[] array) {
+    public void sort(int[] array) {
         int length = array.length;
         
         for (int i = 0; i < length - 1; i++) {
@@ -23,7 +23,7 @@ public class BubbleSort {
         }
     }
     
-    private static void swap(int[] array, int i, int j) {
+    private void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;

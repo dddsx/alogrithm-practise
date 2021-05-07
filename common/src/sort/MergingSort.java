@@ -1,9 +1,13 @@
 package sort;
 
 
-public class MergingSort {
-    
-    public static void sort(int[] arr, int left, int right) {
+public class MergingSort implements Sortable {
+
+    public void sort(int[] arr) {
+        sort(arr, 0, arr.length - 1);
+    }
+
+    public void sort(int[] arr, int left, int right) {
         if (left >= right) {
             return;
         }
@@ -14,7 +18,7 @@ public class MergingSort {
         merge(arr, left, mid, right); // 合并两个子序列
     }
     
-    private static void merge(int[] arr, int left, int mid, int right) {
+    private void merge(int[] arr, int left, int mid, int right) {
         // ps：也可以从开始就申请一个与原数组大小相同的数组，因为重复new数组会频繁申请内存
         int[] temp = new int[right - left + 1];
 

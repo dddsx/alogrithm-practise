@@ -1,10 +1,10 @@
 package sort;
 
 
-public class RadixSort {
-    
-    public static void sort(int[] a) {
-        if (a == null || a.length < 0) {
+public class RadixSort implements Sortable {
+
+    public void sort(int[] a) {
+        if (a == null) {
             return;
         }
         

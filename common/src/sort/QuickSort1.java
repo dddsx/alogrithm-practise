@@ -3,15 +3,20 @@ package sort;
 /**
  * 参考：http://ju.outofmemory.cn/entry/372908
  */
-public class QuickSort1 {
-    
+public class QuickSort1 implements Sortable {
+
+    @Override
+    public void sort(int[] arr) {
+        sort(arr, 0, arr.length - 1);
+    }
+
     /**
      * 快速排序（左右指针法）
      * @param arr   待排序数组
      * @param start 左边界
      * @param end   右边界
      */
-    public static void sort(int[] arr, int start, int end) {
+    public void sort(int[] arr, int start, int end) {
         if (start >= end) {
             return;
         }
@@ -21,7 +26,7 @@ public class QuickSort1 {
         sort(arr, pivot + 1, end);
     }
     
-    private static int partition(int[] arr, int low, int hight) {
+    private int partition(int[] arr, int low, int hight) {
         int left = low; // 左指针
         int right = hight; // 右指针
 
@@ -49,7 +54,7 @@ public class QuickSort1 {
         return left;
     }
     
-    private static void swap(int[] arr, int l, int r) {
+    private void swap(int[] arr, int l, int r) {
         int temp = arr[l];
         arr[l] = arr[r];
         arr[r] = temp;

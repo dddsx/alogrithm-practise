@@ -21,22 +21,25 @@ public class Test {
     /**
      * 排序枚举
      */
-    private enum SortName {
-        QUICKSORT1("快速排序-左右指针法"),
-        QUICKSORT2("快速排序-挖坑法"),
-        BUBBLESORT("冒泡排序"),
-        INSERTSORT("直接插入排序-位移法"),
-        SELECTIONSORT("选择排序"),
-        MERGINGSORT("归并排序"),
-        HEAPSORT("堆排序"),
-        SHELLSORT("希尔排序"),
-        RADIXSORT("基数排序"),
-        BEADSORT("珠排序");
+    private enum SortEnum {
+        QUICKSORT1("快速排序-左右指针法", QuickSort1.class),
+        QUICKSORT2("快速排序-挖坑法", QuickSort2.class),
+        BUBBLESORT("冒泡排序", BubbleSort.class),
+        INSERTSORT("直接插入排序-位移法", InsertSort.class),
+        SELECTIONSORT("选择排序", SelectionSort.class),
+        MERGINGSORT("归并排序", MergingSort.class),
+        HEAPSORT("堆排序", HeapSort.class),
+        SHELLSORT("希尔排序", ShellSort.class),
+        RADIXSORT("基数排序", RadixSort.class),
+        BEADSORT("珠排序", BeadSort.class);
         
         String name;
+
+        Class<? extends Sortable> clazz;
         
-        SortName(String name) {
+        SortEnum(String name, Class<? extends Sortable> clazz) {
             this.name = name;
+            this.clazz = clazz;
         }
     }
     
@@ -70,47 +73,14 @@ public class Test {
         }
     }
 
-    private static void test(SortName sortName) {
-        System.out.println("进行" + sortName.name() + "(" + sortName.name + ")" + "用例测试");
-        
+    private static void test(SortEnum sortEnum) throws Throwable {
+        System.out.println("进行" + sortEnum.name() + "(" + sortEnum.name + ")" + "用例测试");
+        Sortable sortable = sortEnum.clazz.newInstance();
         while (true) {
             int[] array = generateUseCase();
             int[] sourceArray = new int[array.length];
             System.arraycopy(array, 0, sourceArray, 0, array.length);
-            switch (sortName) {
-                case QUICKSORT1:
-                    QuickSort1.sort(array, 0, array.length - 1);
-                    break;
-                case QUICKSORT2:
-                    QuickSort2.sort(array, 0, array.length - 1);
-                    break;
-                case BUBBLESORT:
-                    BubbleSort.sort(array);
-                    break;
-                case INSERTSORT:
-                    InsertSort.sort(array);
-                    break;
-                case SELECTIONSORT:
-                    SelectionSort.sort(array);
-                    break;
-                case MERGINGSORT:
-                    MergingSort.sort(array, 0, array.length - 1);
-                    break;
-                case HEAPSORT:
-                    HeapSort.sort(array);
-                    break;
-                case SHELLSORT:
-                    ShellSort.sort(array);
-                    break;
-                case RADIXSORT:
-                    RadixSort.sort(array);
-                    break;
-                case BEADSORT:
-                    BeadSort.sort(array);
-                    break;
-                default:
-                    System.exit(0);
-            }
+            sortable.sort(array);
             try {
                 check(array);
             } catch (Exception e) {
@@ -133,8 +103,14 @@ public class Test {
     private static void testAll() {
         // 使用这种实现方式异常会被吞掉，在调用Future#get()方法时异常才会抛出
         // executorService.submit(() -> test(value));
-        for (SortName value : SortName.values()) {
-            Thread thread = new Thread(() -> test(value));
+        for (SortEnum value : SortEnum.values()) {
+            Thread thread = new Thread(() -> {
+                try {
+                    test(value);
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
             thread.setUncaughtExceptionHandler((t, e) -> {
                 e.printStackTrace();
                 System.exit(0);
@@ -143,16 +119,10 @@ public class Test {
         }
     }
     
-    public static void main(String[] args) {
-        // test(SortName.MERGINGSORT);
-        test(SortName.BEADSORT);
-        // testAll();
+    public static void main(String[] args) throws Throwable {
+        // test(SortEnum.MERGINGSORT);
+        testAll();
     }
     
 }
 
-@FunctionalInterface
-interface Sortable {
-
-    void sort(int[] a);
-}

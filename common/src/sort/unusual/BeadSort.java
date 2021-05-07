@@ -1,13 +1,15 @@
 package sort.unusual;
 
 
+import sort.Sortable;
+
 /**
  * 珠排序，https://www.cnblogs.com/kkun/archive/2011/11/23/2260301.html
  * 暂不支持0元素
  */
-public class BeadSort {
+public class BeadSort implements Sortable {
 
-    public static void sort(int[] arr) {
+    public void sort(int[] arr) {
         int len = arr.length;
         int maxNum = max(arr); // 获取待排序数组的最大值
         int[][] bead = new int[arr.length][maxNum];
@@ -50,7 +52,7 @@ public class BeadSort {
         }
     }
 
-    private static int max(int[] arr) {
+    private int max(int[] arr) {
         int max = Integer.MIN_VALUE;
         for (int i : arr) {
             if (i > max) {

@@ -1,15 +1,20 @@
 package sort;
 
 
-public class QuickSort2 {
-    
+public class QuickSort2 implements Sortable {
+
+    @Override
+    public void sort(int[] arr) {
+        sort(arr, 0, arr.length - 1);
+    }
+
     /**
      * 快速排序（挖坑法递归）
      * @param arr  待排序数组
      * @param low  左边界
      * @param high 右边界
      */
-    public static void sort(int arr[], int low, int high) {
+    public void sort(int[] arr, int low, int high) {
         if (arr == null || arr.length <= 0) {
             return;
         }
@@ -35,4 +40,5 @@ public class QuickSort2 {
         sort(arr, low, left - 1);
         sort(arr, left + 1, high);
     }
+
 }
