@@ -9,4 +9,14 @@ public class Demo {
 
         }
     }
+
+    private static class Solution {
+
+        public void sort(int[] arr) {
+
+
+        }
+
+
+    }
 }

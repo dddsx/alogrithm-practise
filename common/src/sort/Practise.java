@@ -112,6 +112,37 @@ public class Practise {
         }
     }
 
+    /**
+     * 力扣原题，3种颜色排序，也就是排序元素0, 1, 2
+     */
+    static class ThreeSort implements  Sortable {
+
+        @Override
+        public void sort(int[] a) {
+            int p0 = 0; // 表示下一个用于插入0的位置
+            int p1 = 0; // 表示下一个用于插入1的位置
+            for (int i = 0; i < a.length; i++) {
+                if (a[i] == 0) {
+                    int temp = a[i];
+                    a[i] = a[p0];
+                    a[p0] = temp;
+                    if (p1 > p0) {
+                        temp = a[i];
+                        a[i] = a[p1];
+                        a[p1] = temp;
+                    }
+                    p0++;
+                    p1++;
+                } else if (a[i] == 1) {
+                    int temp = a[i];
+                    a[i] = a[p1];
+                    a[p1] = temp;
+                    p1++;
+                }
+            }
+        }
+    }
+
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
@@ -119,7 +150,7 @@ public class Practise {
     }
 
     public static void main(String[] args) {
-        Test.test(new QuickSort());
+        Test.test(new ThreeSort());
     }
 
 }
