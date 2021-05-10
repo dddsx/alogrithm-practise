@@ -31,35 +31,41 @@ public class Practise {
             sort(a, 0, a.length - 1);
         }
 
-        private void sort(int[] a, int low, int high) {
-            if (low >= high)
+        private void sort(int[] a, int l, int r) {
+            if (l >= r) {
                 return;
-
-            int pivot = partition(a, low, high);
-            sort(a, low, pivot - 1);
-            sort(a, pivot + 1, high);
-        }
-
-        private int partition(int[] a, int low, int high) {
-            int left = low;
-            int right = high;
-
-            int key = a[low];
-
-            while (left < right) {
-                while (left < right && a[right] >= key) {
-                    right--;
-                }
-                while (left < right && a[left] <= key) {
-                    left++;
-                }
-
-                swap(a, left, right);
             }
-
-            swap(a, low, left);
-            return left;
+            int pivot = partition(a, l, r);
+            sort(a, l, pivot - 1);
+            sort(a, pivot + 1, r);
         }
+
+        private int partition(int[] a, int l, int r) {
+            int key = a[l];
+            int i = l;
+            int j = r;
+            while (i < j) {
+                while (a[j] > key && i < j) {
+                    j--;
+                }
+                while (a[i] <= key && i < j) {
+                    i++;
+                }
+                swap(a, i, j);
+            }
+            swap(a, l, i);
+            return i;
+        }
+
+        private void swap(int[] a, int i, int j) {
+            if (i == j) {
+                return;
+            }
+            int temp = a[j];
+            a[j] = a[i];
+            a[i] = temp;
+        }
+
     }
 
     static class MergingSort implements Sortable {
@@ -68,46 +74,40 @@ public class Practise {
             sort(a, 0, a.length - 1);
         }
 
-        private void sort(int[] a, int low, int high) {
-            if (low >= high) {
+        private void sort(int[] a, int l, int r) {
+            if (l == r) {
                 return;
             }
 
-            int mid = (low + high) / 2;
-            sort(a, low, mid);
-            sort(a, mid + 1, high);
-            merge(a, low, mid, high);
+            int mid = (l + r) / 2;
+            sort(a, l ,mid);
+            sort(a, mid + 1, r);
+            merge(a, l, mid, r);
         }
 
-        private void merge(int[] a, int low, int mid, int high) {
-            if (low >= high) {
-                return;
-            }
+        private void merge(int[] a, int l, int mid, int r) {
+            int[] lArr = new int[mid - l + 1];
+            System.arraycopy(a, 0, lArr, 0, mid - l + 1);
+            int[] rArr = new int[r - mid];
+            System.arraycopy(a, mid + 1, rArr, 0, r - mid);
 
-            int[] temp = new int[high - low + 1];
-
-            int left = low;
-            int right = mid + 1;
-            int i = 0;
-
-            // 注意，是"<="
-            while (left <= mid && right <= high) {
-                if (a[left] <= a[right]) {
-                    temp[i++] = a[left++];
+            int i = 0, j = 0, k = l;
+            while (i < lArr.length && j < rArr.length) {
+                if (lArr[i] <= rArr[j]) {
+                    a[k++] = lArr[i];
+                    i++;
                 } else {
-                    temp[i++] = a[right++];
+                    a[k++] = rArr[j];
+                    j++;
                 }
             }
 
-            while (left <= mid) {
-                temp[i++] = a[left++];
-            }
-            while (right <= high) {
-                temp[i++] = a[right++];
+            while (i < lArr.length) {
+                a[k++] = lArr[i++];
             }
 
-            for (i = 0; i < temp.length; i++) {
-                a[low + i] = temp[i];
+            while (j < rArr.length) {
+                a[k++] = rArr[j++];
             }
         }
     }
@@ -119,7 +119,7 @@ public class Practise {
     }
 
     public static void main(String[] args) {
-        Test.test(new MergingSort());
+        Test.test(new QuickSort());
     }
 
 }

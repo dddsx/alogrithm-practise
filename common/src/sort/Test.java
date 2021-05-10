@@ -67,7 +67,7 @@ public class Test {
         int prev = arr[0];
         for (int i = 1; i < arr.length; i++) {
             if(arr[i] < prev){
-                throw new IllegalStateException("测试用例不通过");
+                throw new IllegalStateException("测试用例不通过:" + Arrays.toString(arr));
             }
             prev = arr[i];
         }
